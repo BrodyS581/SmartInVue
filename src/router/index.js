@@ -3,7 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import Inspection from '@/components/Page-Two.vue'
 import PageOne from '@/components/Page-One.vue'
 import PageThree from '@/components/Page-Three.vue'
-
+import CounterButton from '@/components/Counter-Button.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,6 +26,11 @@ const router = createRouter({
       path: '/Page-Three',
       name: 'pageThree',
       component: PageThree,
+    },
+    {
+      path: '/Counter-Button',
+      name: 'counterButton',
+      component: CounterButton,
     },
   ],
   scrollBehavior() {

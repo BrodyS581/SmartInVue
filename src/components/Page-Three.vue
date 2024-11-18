@@ -473,18 +473,12 @@ body {
   position: relative;
   right: 15px;
 }
-.acceptable {
-  background-color: rgba(149, 202, 62, 255);
-  color: #fff;
-  border-radius: 5px;
-  padding: 10px 15px;
-  max-width: 50px;
-  max-height: 50px;
-}
+
 .deficiency {
-  background-color: rgba(204, 64, 37, 255);
-  color: #fff;
+  background-color: #fff;
+  color: rgba(204, 64, 37, 255);
   border-radius: 5px;
+  border: 2px, rgba(204, 64, 37, 255), solid;
   padding: 10px 15px;
   max-width: 50px;
   max-height: 50px;
