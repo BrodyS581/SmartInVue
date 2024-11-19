@@ -4,6 +4,7 @@ import Inspection from '@/components/Page-Two.vue'
 import PageOne from '@/components/Page-One.vue'
 import PageThree from '@/components/Page-Three.vue'
 import CounterButton from '@/components/Counter-Button.vue'
+import DeficiencyButton from '@/components/Deficiency-Button.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,6 +32,11 @@ const router = createRouter({
       path: '/Counter-Button',
       name: 'counterButton',
       component: CounterButton,
+    },
+    {
+      path: '/Deficiency-Button',
+      name: 'deficiencyButton',
+      component: DeficiencyButton,
     },
   ],
   scrollBehavior() {

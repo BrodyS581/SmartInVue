@@ -4,10 +4,10 @@
   </div>
   <div class="nav">
     <div><img class="userLogo" src="/src/assets/userLogo.png" /></div>
-    <div class="websiteTitle"><h1>Test Website 8</h1></div>
+    <div class="websiteTitle"><p>Test Website 8</p></div>
     <hr class="lineInNav" />
-    <div class="userName"><h1>Brody Serfass</h1></div>
-    <div class="userEmail">brodyserfass@gmail.com</div>
+    <div class="userName"><p>Brody Serfass</p></div>
+    <div class="userEmail"><p>brodyserfass@gmail.com</p></div>
   </div>
   <div class="btnContainer">
     <div class="q-pa-md q-gutter-sm">
@@ -77,12 +77,15 @@ body {
 }
 .websiteTitle {
   padding-bottom: 20px;
+  font-size: 25px;
 }
 .userName {
   padding: 20px 0px;
+  font-size: 20px;
 }
 .userEmail {
   padding-bottom: 20px;
+  font-size: 15px;
 }
 .btnContainer {
   background-color: whitesmoke;

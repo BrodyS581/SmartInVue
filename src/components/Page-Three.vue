@@ -197,6 +197,7 @@
       <hr />
     </div>
   </section>
+
   <!--End of Deficiency List-->
   <footer id="mainFooter">
     <hr />
@@ -523,4 +524,6 @@ const title = ref(route.query.rowName || 'Title') // Default to 'Title'
 onBeforeRouteUpdate(to => {
   title.value = to.query.rowName || 'Title'
 })
+
+/*import DeficiencyButton from './Deficiency-Button.vue'*/
 </script>
