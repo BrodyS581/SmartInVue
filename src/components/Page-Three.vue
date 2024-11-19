@@ -7,7 +7,8 @@
         </router-link>
       </div>
       <div class="officeCube">
-        <p>Title</p>
+        <!-- Display the dynamic title -->
+        <p>{{ title }}</p>
       </div>
       <div class="done">
         <p class="doneButton">Done</p>
@@ -509,5 +510,17 @@ onMounted(() => {
 
 watch(count, newCount => {
   sessionStorage.setItem('count', newCount)
+})
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+
+// Access the route
+const route = useRoute()
+
+// Reactive title based on rowName query parameter
+const title = ref(route.query.rowName || 'Title') // Default to 'Title'
+
+// Update the title if the route changes
+onBeforeRouteUpdate(to => {
+  title.value = to.query.rowName || 'Title'
 })
 </script>

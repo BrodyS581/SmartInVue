@@ -35,15 +35,15 @@
   <section id="itemMenu">
     <div class="container">
       <div>
-        <CounterButton buttonId="lighting-1" />
-        <CounterButton buttonId="lighting-2" />
-        <CounterButton buttonId="lighting-3" />
-        <CounterButton buttonId="lighting-4" />
-        <CounterButton buttonId="lighting-5" />
-        <CounterButton buttonId="lighting-6" />
-        <CounterButton buttonId="lighting-7" />
-        <CounterButton buttonId="lighting-8" />
-        <CounterButton buttonId="lighting-9" />
+        <CounterButton buttonId="lighting-1" rowName="Container, Recycle" />
+        <CounterButton buttonId="lighting-2" rowName="Container, Trash" />
+        <CounterButton buttonId="lighting-3" rowName="Floor, Carpet" />
+        <CounterButton buttonId="lighting-4" rowName="Floor, Corners" />
+        <CounterButton buttonId="lighting-5" rowName="Floor, Edges" />
+        <CounterButton buttonId="lighting-6" rowName="Furniture" />
+        <CounterButton buttonId="lighting-7" rowName="Lighting" />
+        <CounterButton buttonId="lighting-8" rowName="Partition" />
+        <CounterButton buttonId="lighting-9" rowName="Telephone" />
       </div>
     </div>
   </section>

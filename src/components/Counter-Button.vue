@@ -1,7 +1,8 @@
 <template>
   <div class="lighting">
     <div class="textForList">
-      <p>Lighting</p>
+      <!-- Use the customizable row name -->
+      <p>{{ rowName }}</p>
     </div>
     <div class="listButtons">
       <div class="selectedButton">
@@ -28,7 +29,13 @@
           </p>
         </div>
       </div>
-      <router-link class="deficiencyLink" to="/Page-Three">
+      <router-link
+        class="deficiencyLink"
+        :to="{
+          path: '/Page-Three',
+          query: { rowName: rowName || 'DefaultValue' },
+        }"
+      >
         <p class="deficiency">0</p>
       </router-link>
     </div>
@@ -45,9 +52,14 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  rowName: {
+    type: String,
+    required: true,
+    default: 'Lighting', // Default name if none is provided
+  },
 })
 
-const { buttonId } = toRefs(props) // Destructure to use buttonId
+const { buttonId, rowName } = toRefs(props) // Destructure props
 
 // State for button visibility
 const buttonsVisible = ref(false)
@@ -85,7 +97,6 @@ function decreaseCount() {
   }
 }
 </script>
-
 <style scoped>
 .minusButton,
 .plusButton2 {
