@@ -50,13 +50,13 @@ const props = defineProps({
   },
 })
 
-const { buttonId, dRowName } = toRefs(props) // Destructure props
+const { dButtonId, dRowName } = toRefs(props) // Destructure props
 
 // State for button visibility
 const buttonsVisible = ref(false)
 
 // Define the unique storage key
-const countKey = `counter-value-${buttonId.value}`
+const countKey = `counter-value-${dButtonId.value}`
 const count = ref(0)
 
 // Restore count from sessionStorage on mount
@@ -109,22 +109,21 @@ function decreaseCount() {
 .minusButton {
   background-color: #fff;
   color: black;
-  border: solid;
-  border-color: rgba(149, 202, 62, 255);
+  border: 2px, rgba(204, 64, 37, 255), solid;
+  border-color: rgba(204, 64, 37, 255);
   border-radius: 5px;
   padding: 10px 15px;
   max-width: 50px;
   max-height: 38.5px;
   position: relative;
-  left: 3px;
+  left: 2px;
 }
 .plusButton2 {
   position: relative;
-  right: 19px;
+  right: 2px;
   background-color: #fff;
   color: black;
-  border: solid;
-  border-color: rgba(149, 202, 62, 255);
+  border: 2px, rgba(204, 64, 37, 255), solid;
   border-radius: 5px;
   padding: 10px 15px;
   max-width: 50px;

@@ -35,166 +35,23 @@
   <!--Start of Deficient List-->
   <section id="deficientMenu">
     <div class="container">
-      <div class="buildup">
-        <div class="textForList">
-          <p>Buildup</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="cobweb">
-        <div class="textForList">
-          <p>Cobweb</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="debris">
-        <div class="textForList">
-          <p>Debris</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="disorganized">
-        <div class="textForList">
-          <p>Disorganized</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="dull">
-        <div class="textForList">
-          <p>Dull</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="dust">
-        <div class="textForList">
-          <p>Dust</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="filledOver">
-        <div class="textForList">
-          <p>Filled (Over)</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="filledUnder">
-        <div class="textForList">
-          <p>Filled (Under)</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-
-      <div class="fingerprints">
-        <div class="textForList">
-          <p>Fingerprints</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="graffiti">
-        <div class="textForList">
-          <p>Graffiti</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="malodor">
-        <div class="textForList">
-          <p>Malodor</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="nonCompliant">
-        <div class="textForList">
-          <p>Non Compliant</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="nonOperational">
-        <div class="textForList">
-          <p>Non-Operational</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="scuff">
-        <div class="textForList">
-          <p>Scuff</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="soil">
-        <div class="textForList">
-          <p>Soil</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="spot">
-        <div class="textForList">
-          <p>Spot</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
-      <div class="streak">
-        <div class="textForList">
-          <p>Streak</p>
-        </div>
-        <div class="listButtons">
-          <p class="deficiency">0</p>
-        </div>
-      </div>
-      <hr />
+      <DeficiencyButton d-button-id="buildup-1" d-row-name="Buildup" />
+      <DeficiencyButton d-button-id="buildup-2" d-row-name="Cobweb" />
+      <DeficiencyButton d-button-id="buildup-3" d-row-name="Debris" />
+      <DeficiencyButton d-button-id="buildup-4" d-row-name="Disorganized" />
+      <DeficiencyButton d-button-id="buildup-5" d-row-name="Dull" />
+      <DeficiencyButton d-button-id="buildup-6" d-row-name="Dust" />
+      <DeficiencyButton d-button-id="buildup-7" d-row-name="Filled (Over)" />
+      <DeficiencyButton d-button-id="buildup-8" d-row-name="Filled (Under)" />
+      <DeficiencyButton d-button-id="buildup-9" d-row-name="Fingerprints" />
+      <DeficiencyButton d-button-id="buildup-10" d-row-name="Graffiti" />
+      <DeficiencyButton d-button-id="buildup-11" d-row-name="Malodor" />
+      <DeficiencyButton d-button-id="buildup-12" d-row-name="Non Compliant" />
+      <DeficiencyButton d-button-id="buildup-13" d-row-name="Non-Operational" />
+      <DeficiencyButton d-button-id="buildup-14" d-row-name="Scuff" />
+      <DeficiencyButton d-button-id="buildup-15" d-row-name="Soil" />
+      <DeficiencyButton d-button-id="buildup-16" d-row-name="Spot" />
+      <DeficiencyButton d-button-id="buildup-17" d-row-name="Streak" />
     </div>
   </section>
 
@@ -318,156 +175,7 @@ body {
 #itemMenu .container {
   height: 100%;
 }
-.buildup {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.cobweb {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.debris {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.disorganized {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.dull {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.dust {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.filledOver {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.selectedButton {
-  display: flex;
-}
-.minusButton {
-  background-color: #fff;
-  color: black;
-  border: solid;
-  border-color: rgba(149, 202, 62, 255);
-  border-radius: 5px;
-  padding: 10px 15px;
-  max-width: 50px;
-  max-height: 38.5px;
-  position: relative;
-  right: 11px;
-}
-.plusButton2 {
-  position: relative;
-  right: 20px;
-  background-color: #fff;
-  color: black;
-  border: solid;
-  border-color: rgba(149, 202, 62, 255);
-  border-radius: 5px;
-  padding: 10px 15px;
-  max-width: 50px;
-  max-height: 38.5px;
-}
-.minusButton,
-.plusButton2 {
-  transition: opacity 0.3s ease;
-}
-.filledUnder {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.fingerprints {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.graffiti {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.malodor {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.nonCompliant {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.nonOperational {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.scuff {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.soil {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.spot {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
-.streak {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  justify-content: space-between;
-}
+
 .listButtons {
   display: flex;
 }
@@ -501,7 +209,7 @@ body {
 </style>
 <script setup>
 import { ref, onMounted, watch } from 'vue'
-
+import DeficiencyButton from './Deficiency-Button.vue'
 const count = ref(1)
 
 onMounted(() => {
@@ -524,6 +232,4 @@ const title = ref(route.query.rowName || 'Title') // Default to 'Title'
 onBeforeRouteUpdate(to => {
   title.value = to.query.rowName || 'Title'
 })
-
-/*import DeficiencyButton from './Deficiency-Button.vue'*/
 </script>
