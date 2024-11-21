@@ -35,7 +35,7 @@
   <section id="itemMenu">
     <div class="container">
       <div>
-        <CounterButton buttonId="lighting-1" rowName="Container, Recycle"  @update-count="updateAcceptableNum/>
+        <CounterButton buttonId="lighting-1" rowName="Container, Recycle" />
         <CounterButton buttonId="lighting-2" rowName="Container, Trash" />
         <CounterButton buttonId="lighting-3" rowName="Floor, Carpet" />
         <CounterButton buttonId="lighting-4" rowName="Floor, Corners" />
