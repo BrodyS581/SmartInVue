@@ -1,7 +1,6 @@
 <template>
   <div class="lighting">
     <div class="textForList">
-      <!-- Use the customizable row name -->
       <p>{{ rowName }}</p>
     </div>
     <div class="listButtons">
@@ -11,7 +10,7 @@
           <p
             class="minusButton"
             v-if="buttonsVisible && count > 0"
-            @click="decreaseCount"
+            @click="decrement"
           >
             -
           </p>
@@ -24,16 +23,18 @@
         </div>
         <div>
           <!-- Plus button -->
-          <p class="plusButton2" v-if="buttonsVisible" @click="increaseCount">
-            +
-          </p>
+          <p class="plusButton2" v-if="buttonsVisible" @click="increment">+</p>
         </div>
       </div>
+      <!-- Update the router-link for the deficient button -->
       <router-link
         class="deficiencyLink"
         :to="{
           path: '/Page-Three',
-          query: { rowName: rowName || 'DefaultValue' },
+          query: {
+            rowName: rowName || 'DefaultValue',
+            acceptableNum: count,
+          },
         }"
       >
         <p class="deficiency">0</p>
@@ -44,9 +45,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, toRefs } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
-// Define props explicitly
 const props = defineProps({
   buttonId: {
     type: String,
@@ -54,21 +54,22 @@ const props = defineProps({
   },
   rowName: {
     type: String,
-    required: true,
-    default: 'Lighting', // Default name if none is provided
+    default: 'Lighting',
+  },
+  initialCount: {
+    type: Number,
+    default: 0,
   },
 })
 
-const { buttonId, rowName } = toRefs(props) // Destructure props
-
-// State for button visibility
+// Local state
+const count = ref(props.initialCount)
 const buttonsVisible = ref(false)
 
-// Define the unique storage key
-const countKey = `counter-value-${buttonId.value}`
-const count = ref(0)
+// Define unique storage key
+const countKey = `counter-value-${props.buttonId}`
 
-// Restore count from sessionStorage on mount
+// Restore count from sessionStorage
 onMounted(() => {
   const savedCount = sessionStorage.getItem(countKey)
   if (savedCount !== null) {
@@ -81,20 +82,21 @@ watch(count, newCount => {
   sessionStorage.setItem(countKey, newCount)
 })
 
-// Toggle visibility of buttons
+// Increment function
+function increment() {
+  count.value++
+}
+
+// Decrement function
+function decrement() {
+  if (count.value > 0) {
+    count.value--
+  }
+}
+
+// Toggle button visibility
 function toggleButtonsVisibility() {
   buttonsVisible.value = !buttonsVisible.value
-}
-
-// Increment and decrement functions
-function increaseCount() {
-  count.value += 1
-}
-
-function decreaseCount() {
-  if (count.value > 0) {
-    count.value -= 1
-  }
 }
 </script>
 <style scoped>

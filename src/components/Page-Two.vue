@@ -34,17 +34,14 @@
 
   <section id="itemMenu">
     <div class="container">
-      <div>
-        <CounterButton buttonId="lighting-1" rowName="Container, Recycle" />
-        <CounterButton buttonId="lighting-2" rowName="Container, Trash" />
-        <CounterButton buttonId="lighting-3" rowName="Floor, Carpet" />
-        <CounterButton buttonId="lighting-4" rowName="Floor, Corners" />
-        <CounterButton buttonId="lighting-5" rowName="Floor, Edges" />
-        <CounterButton buttonId="lighting-6" rowName="Furniture" />
-        <CounterButton buttonId="lighting-7" rowName="Lighting" />
-        <CounterButton buttonId="lighting-8" rowName="Partition" />
-        <CounterButton buttonId="lighting-9" rowName="Telephone" />
-      </div>
+      <CounterButton
+        v-for="button in buttons"
+        :key="button.id"
+        :buttonId="button.id"
+        :rowName="button.rowName"
+        :initialCount="button.count"
+        @updateCount="handleUpdateCount"
+      />
     </div>
   </section>
 
@@ -75,6 +72,29 @@
     </div>
   </footer>
 </template>
+<script setup>
+import { reactive } from 'vue'
+import CounterButton from './Counter-Button.vue'
+
+const buttons = reactive([
+  { id: 'lighting-1', rowName: 'Container, Recycle', count: 0 },
+  { id: 'lighting-2', rowName: 'Container, Trash', count: 0 },
+  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 0 },
+  { id: 'lighting-4', rowName: 'Floor, Corners', count: 0 },
+  { id: 'lighting-5', rowName: 'Floor, Edges', count: 0 },
+  { id: 'lighting-6', rowName: 'Furniture', count: 0 },
+  { id: 'lighting-7', rowName: 'Lighting', count: 0 },
+  { id: 'lighting-8', rowName: 'Partition', count: 0 },
+  { id: 'lighting-9', rowName: 'Telephone', count: 0 },
+])
+
+function handleUpdateCount({ id, count }) {
+  const button = buttons.find(b => b.id === id)
+  if (button) {
+    button.count = count
+  }
+}
+</script>
 <style scoped>
 * {
   margin: 0;
@@ -213,6 +233,3 @@ body {
   }
 }
 </style>
-<script setup>
-import CounterButton from './Counter-Button.vue'
-</script>

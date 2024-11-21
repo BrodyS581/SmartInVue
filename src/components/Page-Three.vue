@@ -23,7 +23,7 @@
       </div>
       <div class="deficientCount">
         <p class="acceptableLabel">Acceptable</p>
-        <p class="acceptableNum">1</p>
+        <p class="acceptableNum">{{ acceptableNum }}</p>
         |
         <p class="deficientNum">0</p>
         <p class="deficientLabel">Deficient</p>
@@ -77,6 +77,35 @@
     </div>
   </footer>
 </template>
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import DeficiencyButton from './Deficiency-Button.vue'
+const count = ref(1)
+
+onMounted(() => {
+  const savedCount = sessionStorage.getItem('count')
+  count.value = savedCount ? parseInt(savedCount) : 1
+})
+
+watch(count, newCount => {
+  sessionStorage.setItem('count', newCount)
+})
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+
+// Access the route
+const route = useRoute()
+
+// Reactive title based on rowName query parameter
+const title = ref(route.query.rowName || 'Title') // Default to 'Title'
+
+// Update the title if the route changes
+onBeforeRouteUpdate(to => {
+  title.value = to.query.rowName || 'Title'
+})
+
+// Retrieve the count from the query parameters
+const acceptableNum = route.query.acceptableNum || 0
+</script>
 <style scoped>
 * {
   margin: 0;
@@ -207,29 +236,3 @@ body {
   padding: 20px 15px;
 }
 </style>
-<script setup>
-import { ref, onMounted, watch } from 'vue'
-import DeficiencyButton from './Deficiency-Button.vue'
-const count = ref(1)
-
-onMounted(() => {
-  const savedCount = sessionStorage.getItem('count')
-  count.value = savedCount ? parseInt(savedCount) : 1
-})
-
-watch(count, newCount => {
-  sessionStorage.setItem('count', newCount)
-})
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
-
-// Access the route
-const route = useRoute()
-
-// Reactive title based on rowName query parameter
-const title = ref(route.query.rowName || 'Title') // Default to 'Title'
-
-// Update the title if the route changes
-onBeforeRouteUpdate(to => {
-  title.value = to.query.rowName || 'Title'
-})
-</script>
