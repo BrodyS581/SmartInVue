@@ -78,13 +78,13 @@ import CounterButton from './Counter-Button.vue'
 
 const buttons = reactive([
   { id: 'lighting-1', rowName: 'Container, Recycle', count: 0 },
-  { id: 'lighting-2', rowName: 'Container, Trash', count: 0 },
-  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 0 },
-  { id: 'lighting-4', rowName: 'Floor, Corners', count: 0 },
-  { id: 'lighting-5', rowName: 'Floor, Edges', count: 0 },
-  { id: 'lighting-6', rowName: 'Furniture', count: 0 },
-  { id: 'lighting-7', rowName: 'Lighting', count: 0 },
-  { id: 'lighting-8', rowName: 'Partition', count: 0 },
+  { id: 'lighting-2', rowName: 'Container, Trash', count: 1 },
+  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 1 },
+  { id: 'lighting-4', rowName: 'Floor, Corners', count: 1 },
+  { id: 'lighting-5', rowName: 'Floor, Edges', count: 1 },
+  { id: 'lighting-6', rowName: 'Furniture', count: 2 },
+  { id: 'lighting-7', rowName: 'Lighting', count: 1 },
+  { id: 'lighting-8', rowName: 'Partition', count: 1 },
   { id: 'lighting-9', rowName: 'Telephone', count: 0 },
 ])
 
