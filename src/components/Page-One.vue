@@ -11,11 +11,10 @@
   </div>
   <div class="btnContainer">
     <div class="q-pa-md q-gutter-sm">
-      <router-link to="/Page-Two">
+      <router-link class="rLink" to="/Page-Two">
         <q-btn
           class="button"
           @click="startInspection"
-          color="secondary"
           icon-right="+"
           label="Start Inspection"
         />
@@ -27,11 +26,13 @@
 
   <footer>
     <ul>
-      <li>Home</li>
-      <li>Inspections</li>
-      <li>Tickets</li>
-      <li>Checklists</li>
-      <li>Settings</li>
+      <li>
+        <q-btn icon="🏠︎" label="Home" stack class="homeBtn" />
+      </li>
+      <li><q-btn icon="📋" label="Inspections" stack class="inspBtn" /></li>
+      <li><q-btn icon="🎫" label="Tickets" stack /></li>
+      <li><q-btn icon="✅" label="Checklists" stack /></li>
+      <li><q-btn icon="⚙️" label="Settings" stack /></li>
     </ul>
   </footer>
 </template>
@@ -103,12 +104,19 @@ body {
   display: flex;
   align-items: center;
   padding: 10px;
+  color: black;
+}
+.rLink {
+  text-decoration: none;
 }
 ul {
   list-style: none;
   display: flex;
   justify-content: space-around;
   align-items: center;
+}
+.homeBtn {
+  color: rgba(149, 202, 62, 255);
 }
 </style>
 
