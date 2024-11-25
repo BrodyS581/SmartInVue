@@ -10,7 +10,9 @@
         <p>Office Cube</p>
       </div>
       <div class="accept">
-        <p class="acceptButton">Accept</p>
+        <router-link class="cancelButton" to="/Page-One">
+          <p class="acceptButton">Accept</p></router-link
+        >
       </div>
     </div>
   </nav>

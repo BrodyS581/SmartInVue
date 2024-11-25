@@ -11,7 +11,9 @@
         <p>{{ title }}</p>
       </div>
       <div class="done">
-        <p class="doneButton">Done</p>
+        <router-link class="cancelButton" to="/Page-Two">
+          <p class="doneButton">Done</p>
+        </router-link>
       </div>
     </div>
   </nav>
