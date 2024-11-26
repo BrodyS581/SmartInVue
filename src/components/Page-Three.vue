@@ -34,30 +34,21 @@
     </div>
   </header>
   <hr />
-  <!--Start of Deficient List-->
+
   <section id="deficientMenu">
     <div class="container">
-      <DeficiencyButton d-button-id="buildup-1" d-row-name="Buildup" />
-      <DeficiencyButton d-button-id="buildup-2" d-row-name="Cobweb" />
-      <DeficiencyButton d-button-id="buildup-3" d-row-name="Debris" />
-      <DeficiencyButton d-button-id="buildup-4" d-row-name="Disorganized" />
-      <DeficiencyButton d-button-id="buildup-5" d-row-name="Dull" />
-      <DeficiencyButton d-button-id="buildup-6" d-row-name="Dust" />
-      <DeficiencyButton d-button-id="buildup-7" d-row-name="Filled (Over)" />
-      <DeficiencyButton d-button-id="buildup-8" d-row-name="Filled (Under)" />
-      <DeficiencyButton d-button-id="buildup-9" d-row-name="Fingerprints" />
-      <DeficiencyButton d-button-id="buildup-10" d-row-name="Graffiti" />
-      <DeficiencyButton d-button-id="buildup-11" d-row-name="Malodor" />
-      <DeficiencyButton d-button-id="buildup-12" d-row-name="Non Compliant" />
-      <DeficiencyButton d-button-id="buildup-13" d-row-name="Non-Operational" />
-      <DeficiencyButton d-button-id="buildup-14" d-row-name="Scuff" />
-      <DeficiencyButton d-button-id="buildup-15" d-row-name="Soil" />
-      <DeficiencyButton d-button-id="buildup-16" d-row-name="Spot" />
-      <DeficiencyButton d-button-id="buildup-17" d-row-name="Streak" />
+      <DeficiencyButton
+        v-for="(deficiency, index) in deficiencies"
+        :key="index"
+        :d-button-id="deficiency.id"
+        :d-row-name="deficiency.name"
+        :total-count="totalCount"
+        :acceptable-num="acceptableNum"
+        @updateTotalCount="updateTotalCount"
+      />
     </div>
   </section>
 
-  <!--End of Deficiency List-->
   <footer id="mainFooter">
     <hr />
     <div class="container">
@@ -80,33 +71,49 @@
   </footer>
 </template>
 <script setup>
-import { ref, onMounted, watch } from 'vue'
-import DeficiencyButton from './Deficiency-Button.vue'
-const count = ref(1)
-
-onMounted(() => {
-  const savedCount = sessionStorage.getItem('count')
-  count.value = savedCount ? parseInt(savedCount) : 1
-})
-
-watch(count, newCount => {
-  sessionStorage.setItem('count', newCount)
-})
+import { ref, onMounted } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import DeficiencyButton from './Deficiency-Button.vue'
 
-// Access the route
+const totalCount = ref(0) // Centralized total count state
 const route = useRoute()
+const acceptableNum = ref(parseInt(route.query.acceptableNum || 0, 10))
 
-// Reactive title based on rowName query parameter
-const title = ref(route.query.rowName || 'Title') // Default to 'Title'
-
-// Update the title if the route changes
+// Update acceptableNum dynamically on route change
 onBeforeRouteUpdate(to => {
-  title.value = to.query.rowName || 'Title'
+  acceptableNum.value = parseInt(to.query.acceptableNum || 0, 10)
+})
+onMounted(() => {
+  acceptableNum.value = parseInt(route.query.acceptableNum || 0, 10) // Initialize on mount
 })
 
-// Retrieve the count from the query parameters
-const acceptableNum = route.query.acceptableNum || 0
+// Dynamically update `acceptableNum` on route change
+onBeforeRouteUpdate(to => {
+  acceptableNum.value = parseInt(to.query.acceptableNum || 0, 10)
+})
+// Update total count based on emitted events
+function updateTotalCount(change) {
+  totalCount.value += change
+}
+const deficiencies = [
+  { id: 'buildup-1', name: 'Buildup' },
+  { id: 'buildup-2', name: 'Cobweb' },
+  { id: 'buildup-3', name: 'Debris' },
+  { id: 'buildup-4', name: 'Disorganized' },
+  { id: 'buildup-5', name: 'Dull' },
+  { id: 'buildup-6', name: 'Dust' },
+  { id: 'buildup-7', name: 'Filled (Over)' },
+  { id: 'buildup-8', name: 'Filled (Under)' },
+  { id: 'buildup-9', name: 'Fingerprints' },
+  { id: 'buildup-10', name: 'Graffiti' },
+  { id: 'buildup-11', name: 'Malodor' },
+  { id: 'buildup-12', name: 'Non Compliant' },
+  { id: 'buildup-13', name: 'Non-Operational' },
+  { id: 'buildup-14', name: 'Scuff' },
+  { id: 'buildup-15', name: 'Soil' },
+  { id: 'buildup-16', name: 'Spot' },
+  { id: 'buildup-17', name: 'Streak' },
+]
 </script>
 <style scoped>
 * {

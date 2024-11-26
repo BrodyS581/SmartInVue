@@ -1,13 +1,11 @@
 <template>
   <div class="buildup">
     <div class="textForList">
-      <!-- Use the customizable row name -->
       <p>{{ dRowName }}</p>
     </div>
     <div class="listButtons">
       <div class="selectedButton">
         <div>
-          <!-- Minus button -->
           <p
             class="minusButton"
             v-if="buttonsVisible && count > 0"
@@ -17,14 +15,16 @@
           </p>
         </div>
         <div>
-          <!-- deficient button -->
           <p class="deficient" @click="toggleButtonsVisibility">
             {{ count }}
           </p>
         </div>
         <div>
-          <!-- Plus button -->
-          <p class="plusButton2" v-if="buttonsVisible" @click="increaseCount">
+          <p
+            class="plusButton2"
+            v-if="buttonsVisible && totalCount < acceptableNum"
+            @click="increaseCount"
+          >
             +
           </p>
         </div>
@@ -35,9 +35,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, toRefs } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
-// Define props explicitly
 const props = defineProps({
   dButtonId: {
     type: String,
@@ -46,20 +45,24 @@ const props = defineProps({
   dRowName: {
     type: String,
     required: true,
-    default: 'Lighting', // Default name if none is provided
+    default: 'Lighting',
+  },
+  totalCount: {
+    type: Number, // Acceptable as a number from the parent
+    required: true,
+  },
+  acceptableNum: {
+    type: Number,
+    required: true,
   },
 })
 
-const { dButtonId, dRowName } = toRefs(props) // Destructure props
+const emit = defineEmits(['updateTotalCount']) // Declare events
 
-// State for button visibility
 const buttonsVisible = ref(false)
-
-// Define the unique storage key
-const countKey = `counter-value-${dButtonId.value}`
+const countKey = `counter-value-${props.dButtonId}`
 const count = ref(0)
 
-// Restore count from sessionStorage on mount
 onMounted(() => {
   const savedCount = sessionStorage.getItem(countKey)
   if (savedCount !== null) {
@@ -67,24 +70,28 @@ onMounted(() => {
   }
 })
 
-// Save count to sessionStorage whenever it changes
 watch(count, newCount => {
   sessionStorage.setItem(countKey, newCount)
 })
 
-// Toggle visibility of buttons
+// Show/hide buttons
 function toggleButtonsVisibility() {
   buttonsVisible.value = !buttonsVisible.value
 }
 
-// Increment and decrement functions
+// Increment function
 function increaseCount() {
-  count.value += 1
+  if (props.totalCount < props.acceptableNum) {
+    count.value += 1
+    emit('updateTotalCount', 1) // Notify parent to increment totalCount
+  }
 }
 
+// Decrement function
 function decreaseCount() {
   if (count.value > 0) {
     count.value -= 1
+    emit('updateTotalCount', -1) // Notify parent to decrement totalCount
   }
 }
 </script>
