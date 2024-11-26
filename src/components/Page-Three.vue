@@ -71,7 +71,7 @@
   </footer>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import DeficiencyButton from './Deficiency-Button.vue'
 
@@ -83,14 +83,7 @@ const acceptableNum = ref(parseInt(route.query.acceptableNum || 0, 10))
 onBeforeRouteUpdate(to => {
   acceptableNum.value = parseInt(to.query.acceptableNum || 0, 10)
 })
-onMounted(() => {
-  acceptableNum.value = parseInt(route.query.acceptableNum || 0, 10) // Initialize on mount
-})
 
-// Dynamically update `acceptableNum` on route change
-onBeforeRouteUpdate(to => {
-  acceptableNum.value = parseInt(to.query.acceptableNum || 0, 10)
-})
 // Update total count based on emitted events
 function updateTotalCount(change) {
   totalCount.value += change
