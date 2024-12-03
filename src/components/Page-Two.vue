@@ -11,8 +11,8 @@
       </div>
       <div class="accept">
         <router-link class="cancelButton" to="/Page-One">
-          <p class="acceptButton">Accept</p></router-link
-        >
+          <p class="acceptButton">Accept</p>
+        </router-link>
       </div>
     </div>
   </nav>
@@ -42,7 +42,10 @@
         :buttonId="button.id"
         :rowName="button.rowName"
         :initialCount="button.count"
+        :updatedAcceptableNum="button.count"
+        :updatedDeficiencyNum="button.deficiency"
         @updateCount="handleUpdateCount"
+        @goToPageThree="navigateToPageThree"
       />
     </div>
   </section>
@@ -74,29 +77,58 @@
     </div>
   </footer>
 </template>
-<script setup>
-import { reactive } from 'vue'
-import CounterButton from './Counter-Button.vue'
 
+<script setup>
+import { reactive, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+import CounterButton from './Counter-Button.vue'
+import { ref } from 'vue'
+const route = useRoute()
+// Retrieve query parameters
+const updatedAcceptableNum = ref(
+  parseInt(route.query.updatedAcceptableNum || 0, 10),
+)
+const updatedDeficiencyNum = ref(
+  parseInt(route.query.updatedDeficiencyNum || 0, 10),
+)
+
+console.log('Updated Acceptable Number:', updatedAcceptableNum.value)
+console.log('Updated Deficiency Number:', updatedDeficiencyNum.value)
 const buttons = reactive([
-  { id: 'lighting-1', rowName: 'Container, Recycle', count: 0 },
-  { id: 'lighting-2', rowName: 'Container, Trash', count: 1 },
-  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 1 },
-  { id: 'lighting-4', rowName: 'Floor, Corners', count: 1 },
-  { id: 'lighting-5', rowName: 'Floor, Edges', count: 1 },
-  { id: 'lighting-6', rowName: 'Furniture', count: 2 },
-  { id: 'lighting-7', rowName: 'Lighting', count: 1 },
-  { id: 'lighting-8', rowName: 'Partition', count: 1 },
-  { id: 'lighting-9', rowName: 'Telephone', count: 0 },
+  { id: 'lighting-1', rowName: 'Container, Recycle', count: 0, deficiency: 0 },
+  { id: 'lighting-2', rowName: 'Container, Trash', count: 1, deficiency: 0 },
+  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 1, deficiency: 0 },
+  { id: 'lighting-4', rowName: 'Floor, Corners', count: 1, deficiency: 0 },
+  { id: 'lighting-5', rowName: 'Floor, Edges', count: 1, deficiency: 0 },
+  { id: 'lighting-6', rowName: 'Furniture', count: 2, deficiency: 0 },
+  { id: 'lighting-7', rowName: 'Lighting', count: 1, deficiency: 0 },
+  { id: 'lighting-8', rowName: 'Partition', count: 1, deficiency: 0 },
+  { id: 'lighting-9', rowName: 'Telephone', count: 0, deficiency: 0 },
 ])
 
-function handleUpdateCount({ id, count }) {
+// Check for query parameters and update the corresponding button
+onMounted(() => {
+  const { id, updatedAcceptableNum, updatedDeficiencyNum } = route.query
+  if (id) {
+    const button = buttons.find(b => b.id === id)
+    if (button) {
+      button.count = parseInt(updatedAcceptableNum || button.count, 10)
+      button.deficiency = parseInt(
+        updatedDeficiencyNum || button.deficiency,
+        10,
+      )
+    }
+  }
+})
+function handleUpdateCount({ id, count, deficiency }) {
   const button = buttons.find(b => b.id === id)
   if (button) {
     button.count = count
+    button.deficiency = deficiency
   }
 }
 </script>
+
 <style scoped>
 * {
   margin: 0;

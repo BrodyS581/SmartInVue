@@ -7,13 +7,10 @@
         </router-link>
       </div>
       <div class="officeCube">
-        <!-- Display the dynamic title -->
         <p>{{ title }}</p>
       </div>
       <div class="done">
-        <router-link class="cancelButton" to="/Page-Two">
-          <p class="doneButton">Done</p>
-        </router-link>
+        <button @click="navigateBack" class="doneButton">Done</button>
       </div>
     </div>
   </nav>
@@ -27,7 +24,7 @@
         <p class="acceptableLabel">Acceptable</p>
         <p class="acceptableNum">{{ acceptableNum }}</p>
         |
-        <p class="deficientNum">0</p>
+        <p class="deficientNum">{{ deficientNum }}</p>
         <p class="deficientLabel">Deficient</p>
         <hr />
       </div>
@@ -45,6 +42,7 @@
         :total-count="totalCount"
         :acceptable-num="acceptableNum"
         @updateTotalCount="updateTotalCount"
+        @updateDeficientCount="updateDeficientCount"
       />
     </div>
   </section>
@@ -70,24 +68,43 @@
     </div>
   </footer>
 </template>
+
 <script setup>
 import { ref } from 'vue'
-import { useRoute, onBeforeRouteUpdate } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import DeficiencyButton from './Deficiency-Button.vue'
 
-const totalCount = ref(0) // Centralized total count state
 const route = useRoute()
-const acceptableNum = ref(parseInt(route.query.acceptableNum || 0, 10))
+const router = useRouter()
+const title = ref(route.query.rowName || 'Unknown Title')
+const initialAcceptableNum = parseInt(route.query.acceptableNum || 0, 10)
 
-// Update acceptableNum dynamically on route change
-onBeforeRouteUpdate(to => {
-  acceptableNum.value = parseInt(to.query.acceptableNum || 0, 10)
-})
+const acceptableNum = ref(initialAcceptableNum) // Tracks remaining acceptable items
+const totalCount = ref(0)
+const deficientNum = ref(0) // Tracks total deficiencies
 
-// Update total count based on emitted events
 function updateTotalCount(change) {
   totalCount.value += change
 }
+function navigateBack() {
+  router.push({
+    path: '/Page-Two',
+    query: {
+      id: route.query.id,
+      updatedAcceptableNum: acceptableNum.value,
+      updatedDeficiencyNum: deficientNum.value,
+    },
+  })
+}
+
+function updateDeficientCount(newCount) {
+  const change = newCount - deficientNum.value // Calculate the change in deficientNum
+  deficientNum.value = newCount
+
+  // Adjust acceptableNum based on the change
+  acceptableNum.value -= change
+}
+
 const deficiencies = [
   { id: 'buildup-1', name: 'Buildup' },
   { id: 'buildup-2', name: 'Cobweb' },

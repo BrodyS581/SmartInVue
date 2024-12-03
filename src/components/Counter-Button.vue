@@ -26,18 +26,20 @@
           <p class="plusButton2" v-if="buttonsVisible" @click="increment">+</p>
         </div>
       </div>
-      <!-- Update the router-link for the deficient button -->
+      <!-- Updated router-link for the deficiency button -->
       <router-link
         class="deficiencyLink"
         :to="{
           path: '/Page-Three',
           query: {
+            id: buttonId,
             rowName: rowName || 'DefaultValue',
             acceptableNum: count,
+            deficiencyNum: deficiencyNum,
           },
         }"
       >
-        <p class="deficiency">0</p>
+        <p class="deficiency">{{ deficiencyNum }}</p>
       </router-link>
     </div>
   </div>
@@ -65,21 +67,36 @@ const props = defineProps({
 // Local state
 const count = ref(props.initialCount)
 const buttonsVisible = ref(false)
+const deficiencyNum = ref(0) // Track deficiency values for this button
 
-// Define unique storage key
+// Define unique storage keys
 const countKey = `counter-value-${props.buttonId}`
+const deficiencyKey = `deficiency-value-${props.buttonId}`
 
-// Restore count from sessionStorage
+// Restore values from sessionStorage
 onMounted(() => {
   const savedCount = sessionStorage.getItem(countKey)
+  const savedDeficiency = sessionStorage.getItem(deficiencyKey)
+
   if (savedCount !== null) {
     count.value = parseInt(savedCount, 10)
   }
+  if (savedDeficiency !== null) {
+    deficiencyNum.value = parseInt(savedDeficiency, 10)
+  }
 })
-
-// Save count to sessionStorage whenever it changes
+watch(
+  () => props.initialCount,
+  newCount => {
+    count.value = newCount
+  },
+)
+// Save count and deficiency values to sessionStorage whenever they change
 watch(count, newCount => {
   sessionStorage.setItem(countKey, newCount)
+})
+watch(deficiencyNum, newDeficiency => {
+  sessionStorage.setItem(deficiencyKey, newDeficiency)
 })
 
 // Increment function

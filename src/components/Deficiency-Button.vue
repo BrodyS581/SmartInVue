@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps({
   dButtonId: {
@@ -48,7 +48,7 @@ const props = defineProps({
     default: 'Lighting',
   },
   totalCount: {
-    type: Number, // Acceptable as a number from the parent
+    type: Number,
     required: true,
   },
   acceptableNum: {
@@ -57,22 +57,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['updateTotalCount']) // Declare events
+const emit = defineEmits(['updateTotalCount', 'updateDeficientCount']) // Declare events
 
 const buttonsVisible = ref(false)
-const countKey = `counter-value-${props.dButtonId}`
 const count = ref(0)
-
-onMounted(() => {
-  const savedCount = sessionStorage.getItem(countKey)
-  if (savedCount !== null) {
-    count.value = parseInt(savedCount, 10)
-  }
-})
-
-watch(count, newCount => {
-  sessionStorage.setItem(countKey, newCount)
-})
 
 // Show/hide buttons
 function toggleButtonsVisibility() {
@@ -84,6 +72,7 @@ function increaseCount() {
   if (props.totalCount < props.acceptableNum) {
     count.value += 1
     emit('updateTotalCount', 1) // Notify parent to increment totalCount
+    emit('updateDeficientCount', count.value) // Notify parent about the new count
   }
 }
 
@@ -92,6 +81,7 @@ function decreaseCount() {
   if (count.value > 0) {
     count.value -= 1
     emit('updateTotalCount', -1) // Notify parent to decrement totalCount
+    emit('updateDeficientCount', count.value) // Notify parent about the new count
   }
 }
 </script>
