@@ -22,7 +22,7 @@
         <div>
           <p
             class="plusButton2"
-            v-if="buttonsVisible && totalCount < acceptableNum"
+            v-if="buttonsVisible && totalCount <= acceptableNum"
             @click="increaseCount"
           >
             +
@@ -66,12 +66,14 @@ const count = ref(0)
 function toggleButtonsVisibility() {
   buttonsVisible.value = !buttonsVisible.value
 }
+console.log('totalCount', props.totalCount)
+console.log('acceptableNum', props.acceptableNum)
 
 // Increment function
 function increaseCount() {
   if (props.totalCount < props.acceptableNum) {
     count.value += 1
-    emit('updateTotalCount', 1) // Notify parent to increment totalCount
+    emit('updateTotalCount', props.totalCount) // Notify parent to increment totalCount
     emit('updateDeficientCount', count.value) // Notify parent about the new count
   }
 }
