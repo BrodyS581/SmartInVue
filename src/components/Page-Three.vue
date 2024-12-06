@@ -97,9 +97,9 @@ function navigateBack() {
   })
 }
 
-function updateDeficientCount(newCount) {
-  const change = newCount - deficientNum.value // Calculate the change in deficientNum
-  deficientNum.value = newCount
+function updateDeficientCount(newDCount) {
+  const change = newDCount - deficientNum.value // Calculate the change in deficientNum
+  deficientNum.value = newDCount
 
   // Adjust acceptableNum based on the change
   acceptableNum.value -= change

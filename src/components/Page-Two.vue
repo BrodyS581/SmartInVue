@@ -43,7 +43,7 @@
         :rowName="button.rowName"
         :initialCount="button.count"
         :updatedAcceptableNum="button.count"
-        :updatedDeficiencyNum="button.deficiency"
+        :updateDeficientCount="button.deficientNum"
         @updateCount="handleUpdateCount"
         @goToPageThree="navigateToPageThree"
       />
@@ -108,23 +108,23 @@ const buttons = reactive([
 
 // Check for query parameters and update the corresponding button
 onMounted(() => {
-  const { id, updatedAcceptableNum, updatedDeficiencyNum } = route.query
+  const { id, updatedAcceptableNum, updateDeficientCount } = route.query
   if (id) {
     const button = buttons.find(b => b.id === id)
     if (button) {
       button.count = parseInt(updatedAcceptableNum || button.count, 10)
-      button.deficiency = parseInt(
-        updatedDeficiencyNum || button.deficiency,
+      button.deficientNum = parseInt(
+        updateDeficientCount || button.deficientNum,
         10,
       )
     }
   }
 })
-function handleUpdateCount({ id, count, deficiency }) {
+function handleUpdateCount({ id, count, deficientNum }) {
   const button = buttons.find(b => b.id === id)
   if (button) {
     button.count = count
-    button.deficiency = deficiency
+    button.deficientNum = deficientNum
   }
 }
 </script>

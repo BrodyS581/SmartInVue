@@ -35,11 +35,11 @@
             id: buttonId,
             rowName: rowName || 'DefaultValue',
             acceptableNum: count,
-            deficiencyNum: deficiencyNum,
+            deficiencyNum: dCount,
           },
         }"
       >
-        <p class="deficiency">{{ deficiencyNum }}</p>
+        <p class="deficiency">{{ dCount }}</p>
       </router-link>
     </div>
   </div>
@@ -67,22 +67,22 @@ const props = defineProps({
 // Local state
 const count = ref(props.initialCount)
 const buttonsVisible = ref(false)
-const deficiencyNum = ref(0) // Track deficiency values for this button
+const dCount = ref(0) // Track deficiency values for this button
 
 // Define unique storage keys
 const countKey = `counter-value-${props.buttonId}`
-const deficiencyKey = `deficiency-value-${props.buttonId}`
+const dCountKey = `deficiency-value-${props.buttonId}`
 
 // Restore values from sessionStorage
 onMounted(() => {
   const savedCount = sessionStorage.getItem(countKey)
-  const savedDeficiency = sessionStorage.getItem(deficiencyKey)
+  const savedDCount = sessionStorage.getItem(dCountKey)
 
   if (savedCount !== null) {
     count.value = parseInt(savedCount, 10)
   }
-  if (savedDeficiency !== null) {
-    deficiencyNum.value = parseInt(savedDeficiency, 10)
+  if (savedDCount !== null) {
+    dCount.value = parseInt(savedDCount, 10)
   }
 })
 watch(
@@ -95,8 +95,8 @@ watch(
 watch(count, newCount => {
   sessionStorage.setItem(countKey, newCount)
 })
-watch(deficiencyNum, newDeficiency => {
-  sessionStorage.setItem(deficiencyKey, newDeficiency)
+watch(dCount, newDCount => {
+  sessionStorage.setItem(dCountKey, newDCount)
 })
 
 // Increment function
