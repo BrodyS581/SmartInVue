@@ -20,5 +20,34 @@ export const useCounterStore = defineStore('counter', () => {
     count.value = newCount
   }
 
-  return { count, doubleCount, increment, decrement, setCount }
+  const dCount = ref(0) // Initialize count
+  const dDoubleCount = computed(() => dCount.value * 2) // Keep this if needed
+
+  // Increment the count
+  function dIncrement() {
+    dCount.value++
+  }
+
+  // Decrement the count (with optional validation)
+  function dDecrement() {
+    if (dCount.value > 0) dCount.value--
+  }
+
+  // Set count to a specific value (if needed)
+  function dSetCount(newDCount) {
+    dCount.value = newDCount
+  }
+
+  return {
+    count,
+    doubleCount,
+    increment,
+    decrement,
+    setCount,
+    dCount,
+    dDoubleCount,
+    dIncrement,
+    dDecrement,
+    dSetCount,
+  }
 })

@@ -8,7 +8,7 @@
         <div>
           <p
             class="minusButton"
-            v-if="buttonsVisible && count > 0"
+            v-if="buttonsVisible && dCount > 0"
             @click="decreaseCount"
           >
             -
@@ -16,7 +16,7 @@
         </div>
         <div>
           <p class="deficient" @click="toggleButtonsVisibility">
-            {{ count }}
+            {{ dCount }}
           </p>
         </div>
         <div>
@@ -60,7 +60,7 @@ const props = defineProps({
 const emit = defineEmits(['updateTotalCount', 'updateDeficientCount']) // Declare events
 
 const buttonsVisible = ref(false)
-const count = ref(0)
+const dCount = ref(0)
 
 // Show/hide buttons
 function toggleButtonsVisibility() {
@@ -72,18 +72,18 @@ console.log('acceptableNum', props.acceptableNum)
 // Increment function
 function increaseCount() {
   if (props.totalCount < props.acceptableNum) {
-    count.value += 1
+    dCount.value += 1
     emit('updateTotalCount', props.totalCount) // Notify parent to increment totalCount
-    emit('updateDeficientCount', count.value) // Notify parent about the new count
+    emit('updateDeficientCount', dCount.value) // Notify parent about the new count
   }
 }
 
 // Decrement function
 function decreaseCount() {
-  if (count.value > 0) {
-    count.value -= 1
+  if (dCount.value > 0) {
+    dCount.value -= 1
     emit('updateTotalCount', -1) // Notify parent to decrement totalCount
-    emit('updateDeficientCount', count.value) // Notify parent about the new count
+    emit('updateDeficientCount', dCount.value) // Notify parent about the new count
   }
 }
 </script>
