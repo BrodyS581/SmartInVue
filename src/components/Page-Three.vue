@@ -40,7 +40,7 @@
         :d-button-id="deficiency.id"
         :d-row-name="deficiency.name"
         :total-count="totalCount"
-        :acceptable-num="acceptableNum"
+        :acceptableNum="acceptableNum"
         @updateTotalCount="updateTotalCount"
         @updateDeficientCount="updateDeficientCount"
       />

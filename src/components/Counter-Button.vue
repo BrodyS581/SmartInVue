@@ -35,7 +35,7 @@
             id: buttonId,
             rowName: rowName || 'DefaultValue',
             acceptableNum: count,
-            deficiencyNum: dCount,
+            deficientNum: dCount,
           },
         }"
       >
@@ -72,10 +72,21 @@ const props = defineProps({
 const count = ref(props.initialCount)
 const buttonsVisible = ref(false)
 const dCount = ref(props.initialDCount) // Track deficiency values for this button
+let newCount
+let newDCount
+let countKey
+let dCountKey
 
 // Define unique storage keys
-const countKey = `counter-value-${props.buttonId}`
-const dCountKey = `deficiency-value-${props.buttonId}`
+if (props.buttonId) {
+  const countKey = `counter-value-${props.buttonId}`
+  const dCountKey = `deficiency-value-${props.buttonId}`
+
+  sessionStorage.setItem(countKey, newCount)
+  sessionStorage.setItem(dCountKey, newDCount)
+} else {
+  console.warn('buttonId is undefined for Counter-Button.vue')
+}
 
 // Restore values from sessionStorage
 onMounted(() => {
