@@ -43,7 +43,7 @@
         :rowName="button.rowName"
         :initialCount="button.count"
         :updatedAcceptableNum="button.count"
-        :updateDeficientCount="button.deficientNum"
+        :updateDeficientCount="button.dCount"
         @updateCount="handleUpdateCount"
         @goToPageThree="navigateToPageThree"
       />
@@ -88,22 +88,27 @@ const route = useRoute()
 const updatedAcceptableNum = ref(
   parseInt(route.query.updatedAcceptableNum || 0, 10),
 )
-const updatedDeficiencyNum = ref(
-  parseInt(route.query.updatedDeficiencyNum || 0, 10),
+const updateDeficientCount = ref(
+  parseInt(route.query.updateDeficientCount || 0, 10),
 )
 
 console.log('Updated Acceptable Number:', updatedAcceptableNum.value)
-console.log('Updated Deficiency Number:', updatedDeficiencyNum.value)
+console.log('Updated Deficiency Number:', updateDeficientCount.value)
 const buttons = reactive([
-  { id: 'lighting-1', rowName: 'Container, Recycle', count: 0, deficiency: 0 },
-  { id: 'lighting-2', rowName: 'Container, Trash', count: 1, deficiency: 0 },
-  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 1, deficiency: 0 },
-  { id: 'lighting-4', rowName: 'Floor, Corners', count: 1, deficiency: 0 },
-  { id: 'lighting-5', rowName: 'Floor, Edges', count: 1, deficiency: 0 },
-  { id: 'lighting-6', rowName: 'Furniture', count: 2, deficiency: 0 },
-  { id: 'lighting-7', rowName: 'Lighting', count: 1, deficiency: 0 },
-  { id: 'lighting-8', rowName: 'Partition', count: 1, deficiency: 0 },
-  { id: 'lighting-9', rowName: 'Telephone', count: 0, deficiency: 0 },
+  {
+    id: 'lighting-1',
+    rowName: 'Container, Recycle',
+    count: 0,
+    dCount: 0,
+  },
+  { id: 'lighting-2', rowName: 'Container, Trash', count: 1, dCount: 0 },
+  { id: 'lighting-3', rowName: 'Floor, Carpet', count: 1, dCount: 0 },
+  { id: 'lighting-4', rowName: 'Floor, Corners', count: 1, dCount: 0 },
+  { id: 'lighting-5', rowName: 'Floor, Edges', count: 1, dCount: 0 },
+  { id: 'lighting-6', rowName: 'Furniture', count: 2, dCount: 0 },
+  { id: 'lighting-7', rowName: 'Lighting', count: 1, dCount: 0 },
+  { id: 'lighting-8', rowName: 'Partition', count: 1, dCount: 0 },
+  { id: 'lighting-9', rowName: 'Telephone', count: 0, dCount: 0 },
 ])
 
 // Check for query parameters and update the corresponding button
@@ -113,18 +118,15 @@ onMounted(() => {
     const button = buttons.find(b => b.id === id)
     if (button) {
       button.count = parseInt(updatedAcceptableNum || button.count, 10)
-      button.deficientNum = parseInt(
-        updateDeficientCount || button.deficientNum,
-        10,
-      )
+      button.dCount = parseInt(updateDeficientCount || button.dCount, 10)
     }
   }
 })
-function handleUpdateCount({ id, count, deficientNum }) {
+function handleUpdateCount({ id, count, dCount }) {
   const button = buttons.find(b => b.id === id)
   if (button) {
     button.count = count
-    button.deficientNum = deficientNum
+    button.dCount = dCount
   }
 }
 </script>

@@ -78,10 +78,10 @@ const route = useRoute()
 const router = useRouter()
 const title = ref(route.query.rowName || 'Unknown Title')
 const initialAcceptableNum = parseInt(route.query.acceptableNum || 0, 10)
-
+const initialDeficiencyNum = parseInt(route.query.deficientNum || 0, 10)
 const acceptableNum = ref(initialAcceptableNum) // Tracks remaining acceptable items
 const totalCount = ref(0)
-const deficientNum = ref(0) // Tracks total deficiencies
+const deficientNum = ref(initialDeficiencyNum) // Tracks total deficiencies
 
 function updateTotalCount(change) {
   totalCount.value += change
@@ -92,7 +92,7 @@ function navigateBack() {
     query: {
       id: route.query.id,
       updatedAcceptableNum: acceptableNum.value,
-      updatedDeficiencyNum: deficientNum.value,
+      updateDeficientCount: deficientNum.value,
     },
   })
 }

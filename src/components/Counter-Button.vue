@@ -62,12 +62,16 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  initialDCount: {
+    type: Number,
+    default: 0,
+  },
 })
 
 // Local state
 const count = ref(props.initialCount)
 const buttonsVisible = ref(false)
-const dCount = ref(0) // Track deficiency values for this button
+const dCount = ref(props.initialDCount) // Track deficiency values for this button
 
 // Define unique storage keys
 const countKey = `counter-value-${props.buttonId}`
@@ -89,6 +93,12 @@ watch(
   () => props.initialCount,
   newCount => {
     count.value = newCount
+  },
+)
+watch(
+  () => props.initialDCount,
+  newDCount => {
+    dCount.value = newDCount
   },
 )
 // Save count and deficiency values to sessionStorage whenever they change
